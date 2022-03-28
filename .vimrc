@@ -1,7 +1,7 @@
 filetype on
 filetype plugin on
 filetype indent on
-colorscheme molokai
+"colorscheme molokai
 
 set nocompatible
 set cursorline
@@ -70,9 +70,10 @@ inoremap jj <esc>
 nnoremap \ :
 nnoremap o o<esc>
 nnoremap O O<esc>
-nnoremap n nzz
-nnoremap N Nzz
-nmap Y y$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap Y y$
+nnoremap J mzJ`z
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -84,6 +85,14 @@ nnoremap <leader>ps  :Rg<SPACE>
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
 nnoremap <silent> <leader>- :vertical resize -5<CR>
 noremap <leader>, :silent! :nohlsearch<CR>
+
+" Move Highlighted 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap k :m '<-2<CR>gv=gv
+inoremap <C-j> :m .+1<CR>==
+inoremap <C-k> :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
 
 " Shortcut Ag searching.
 noremap <leader>f :Ack!
@@ -113,5 +122,3 @@ set statusline+=%=
 
 " Show the status on the second to last line.
 set laststatus=2
-
-
