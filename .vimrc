@@ -1,7 +1,6 @@
-filetype on
+    filetype on
 filetype plugin on
 filetype indent on
-"colorscheme molokai
 
 set nocompatible
 set cursorline
@@ -74,6 +73,8 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap Y y$
 nnoremap J mzJ`z
+nnoremap <leader>o o
+nnoremap <leader>O O
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -87,12 +88,8 @@ nnoremap <silent> <leader>- :vertical resize -5<CR>
 noremap <leader>, :silent! :nohlsearch<CR>
 
 " Move Highlighted 
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap k :m '<-2<CR>gv=gv
-inoremap <C-j> :m .+1<CR>==
-inoremap <C-k> :m .-2<CR>==
-nnoremap <leader>j :m .+1<CR>==
-nnoremap <leader>k :m .-2<CR>==
+vnoremap <leader>J :m '>+1<CR>gv=gv
+vnoremap <leader>K :m '<-2<CR>gv=gv
 
 " Shortcut Ag searching.
 noremap <leader>f :Ack!
@@ -120,5 +117,26 @@ set statusline+=\ %F\ %M\ %Y\ %R
 " Use a divider to separate the left side from the right side.
 set statusline+=%=
 
-" Show the status on the second to last line.
-set laststatus=2
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set statusline=
+set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m\
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\
