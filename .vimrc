@@ -106,6 +106,7 @@ vnoremap <leader>p :w !xclip -o -sel c<CR><CR>
 " If the current file type is HTML, set indentation to 2 spaces.
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 
+
 " STATUS LINE -----------------
 
 " Clear status line when vimrc is reloaded.
